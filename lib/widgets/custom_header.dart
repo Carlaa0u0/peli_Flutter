@@ -9,7 +9,7 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return Container(
       color: const Color(0xFFD43162),
-      height: preferredSize.height,
+      // No fixed height here for flexibility, let the content define it
       alignment: Alignment.center,
       child: LayoutBuilder(
         builder: (context, constraints) {
@@ -20,7 +20,7 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
           double searchMaxWidth;
 
           if (maxWidth > 800) {
-            logoSize = 200;  // Logo más grande
+            logoSize = 200; // Logo más grande
             spacing = 30;
             searchMaxWidth = 500;
           } else if (maxWidth > 400) {
@@ -28,8 +28,9 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
             spacing = 20;
             searchMaxWidth = maxWidth * 0.6;
           } else {
+            // Mobile layout adjustments for smaller devices
             logoSize = 60;
-            spacing = 16;
+            spacing = 12; // Slightly reduced spacing for compact layout
             searchMaxWidth = maxWidth * 0.9;
           }
 
@@ -38,6 +39,7 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               child: Column(
+                mainAxisSize: MainAxisSize.min, // Crucial: make column take minimum space
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
@@ -106,12 +108,12 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
           hintStyle: TextStyle(color: Colors.grey[500]),
           prefixIcon: Icon(Icons.search, color: Colors.grey[500]),
           border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
         ),
       ),
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(80);
+  Size get preferredSize => const Size.fromHeight(133.0);
 }

@@ -26,9 +26,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(100.0),
-        child: CustomHeader(
+      appBar: CustomHeader(
           onSearch: (query) async {
             if (query.isEmpty) return;
 
@@ -70,7 +68,6 @@ class _MainScreenState extends State<MainScreen> {
             );
           },
         ),
-      ),
       body: Column(
         children: [
           CategoryNavigation(
