@@ -4,12 +4,14 @@ import 'package:flutter_pelicula_1/screens/movies_screen.dart';
 import 'package:flutter_pelicula_1/screens/series_screen.dart';
 import 'package:flutter_pelicula_1/widgets/custom_header.dart';
 import 'package:flutter_pelicula_1/widgets/category_navigation.dart';
+import 'package:flutter_pelicula_1/services/movie_service.dart';
+import 'package:flutter_pelicula_1/screens/detail_screen.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  const MainScreen({Key? key}) : super(key: key);
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
+  _MainScreenState createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
@@ -25,12 +27,47 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(100.0), // Altura del AppBar
+        preferredSize: const Size.fromHeight(100.0),
         child: CustomHeader(
-          onSearch: (query) {
-            // Lógica para la búsqueda (a implementar)
-            print('Buscando: $query');
-            // Podrías navegar a una pantalla de resultados de búsqueda aquí
+          onSearch: (query) async {
+            if (query.isEmpty) return;
+
+            final results = await MovieService.searchMoviesAndSeries(query);
+
+            if (!mounted) return; // Por si el widget ya fue desmontado
+
+            showDialog(
+              context: context,
+              builder: (_) => AlertDialog(
+                title: Text('Resultados para "$query"'),
+                content: SizedBox(
+                  width: double.maxFinite,
+                  height: 300,
+                  child: results.isEmpty
+                      ? const Text('No se encontraron resultados.')
+                      : ListView.builder(
+                          itemCount: results.length,
+                          itemBuilder: (_, i) => ListTile(
+                            title: Text(results[i].title),
+                            onTap: () {
+                              Navigator.of(context).pop(); // Cierra el diálogo
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => DetailScreen(movie: results[i]),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: const Text('Cerrar'),
+                  )
+                ],
+              ),
+            );
           },
         ),
       ),
@@ -44,9 +81,7 @@ class _MainScreenState extends State<MainScreen> {
               });
             },
           ),
-          Expanded(
-            child: _screens[_selectedIndex],
-          ),
+          Expanded(child: _screens[_selectedIndex]),
         ],
       ),
     );

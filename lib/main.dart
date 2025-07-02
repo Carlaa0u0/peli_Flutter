@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_pelicula_1/providers/movie_provider.dart';
 import 'package:flutter_pelicula_1/screens/main_screen.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: "key.env");
   runApp(
     MultiProvider(
       providers: [

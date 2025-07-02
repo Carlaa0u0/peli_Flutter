@@ -17,9 +17,7 @@ class Movie {
     required this.releaseDate,
   });
 
-  // Método de fábrica para crear una instancia de Movie desde un mapa JSON.
-  // Este método es crucial cuando consumes datos de una API externa,
-  // ya que convierte el formato JSON en un objeto Movie de Dart.
+
   factory Movie.fromJson(Map<String, dynamic> json) {
     return Movie(
       id: json['id'].toString(), // Asegura que el ID sea String

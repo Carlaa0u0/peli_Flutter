@@ -12,25 +12,39 @@ class MovieProvider extends ChangeNotifier {
   List<Movie> get latestReleases => _latestReleases;
 
   MovieProvider() {
-    // Inicializa las listas vacías. Cuando se integre la API,
-    // se llamarían los métodos de MovieService aquí.
-    _popularMovies = MovieService.getPopularMovies();
-    _popularSeries = MovieService.getPopularSeries();
-    _latestReleases = MovieService.getLatestReleases();
-    notifyListeners();
+    _loadAllData();
   }
 
-  // En una aplicación real, aquí tendrías métodos para llamar a tu API
-  // y actualizar las listas. Por ejemplo:
-  /*
+  Future<void> _loadAllData() async {
+    await fetchPopularMovies();
+    await fetchPopularSeries();
+    await fetchLatestReleases();
+  }
+
   Future<void> fetchPopularMovies() async {
     try {
-      _popularMovies = await MovieService().fetchPopularMovies();
+      _popularMovies = await MovieService.getPopularMovies();
       notifyListeners();
     } catch (e) {
-      print('Error fetching popular movies: $e');
-      // Manejar el error, quizás mostrar un mensaje al usuario
+      print('Error al cargar películas populares: $e');
     }
   }
-  */
+
+  Future<void> fetchPopularSeries() async {
+    try {
+      _popularSeries = await MovieService.getPopularSeries();
+      notifyListeners();
+    } catch (e) {
+      print('Error al cargar series populares: $e');
+    }
+  }
+
+  Future<void> fetchLatestReleases() async {
+    try {
+      _latestReleases = await MovieService.getLatestReleases();
+      notifyListeners();
+    } catch (e) {
+      print('Error al cargar últimos estrenos: $e');
+    }
+  }
 }

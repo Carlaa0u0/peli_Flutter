@@ -46,5 +46,6 @@ class SeriesScreen extends StatelessWidget {
         ],
       ),
     );
+    
   }
 }
