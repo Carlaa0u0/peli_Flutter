@@ -9,7 +9,6 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return Container(
       color: const Color(0xFFD43162),
-      // No fixed height here for flexibility, let the content define it
       alignment: Alignment.center,
       child: LayoutBuilder(
         builder: (context, constraints) {
@@ -19,18 +18,18 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
           double spacing;
           double searchMaxWidth;
 
-          if (maxWidth > 800) {
-            logoSize = 200; // Logo más grande
+          if (maxWidth > 800) { //tablets etc
+            logoSize = 200; 
             spacing = 30;
             searchMaxWidth = 500;
-          } else if (maxWidth > 400) {
+          } else if (maxWidth > 400) { //telefonos medianos
             logoSize = 80;
             spacing = 20;
             searchMaxWidth = maxWidth * 0.6;
           } else {
-            // Mobile layout adjustments for smaller devices
+            // telefonos pequeños
             logoSize = 60;
-            spacing = 12; // Slightly reduced spacing for compact layout
+            spacing = 12; 
             searchMaxWidth = maxWidth * 0.9;
           }
 
@@ -39,7 +38,7 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               child: Column(
-                mainAxisSize: MainAxisSize.min, // Crucial: make column take minimum space
+                mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
