@@ -30,12 +30,12 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.black,
         scaffoldBackgroundColor: Colors.black,
         appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.black,
+          backgroundColor: Color(0xFFD43162),
           elevation: 0,
         ),
         textTheme: const TextTheme(
           bodyLarge: TextStyle(color: Colors.white),
-          bodyMedium: TextStyle(color: Colors.white70),
+          bodyMedium: TextStyle(color: Colors.white),
           titleLarge: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           displaySmall: TextStyle(color: Colors.white, fontWeight: FontWeight.bold), // Para DetailScreen title
         ),

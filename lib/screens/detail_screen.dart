@@ -11,6 +11,9 @@ class DetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(movie.title),
+        titleTextStyle: Theme.of(context).textTheme.displaySmall?.copyWith(
+              color: Colors.white,
+            ),
       ),
       body: SingleChildScrollView(
         child: Column(

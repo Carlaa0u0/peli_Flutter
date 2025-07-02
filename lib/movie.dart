@@ -1,6 +1,7 @@
 class Movie {
   final String id;
   final String title;
+  final String name;
   final String posterPath;
   final String? backdropPath;
   final String overview;
@@ -10,6 +11,7 @@ class Movie {
   Movie({
     required this.id,
     required this.title,
+    required this.name,
     required this.posterPath,
     this.backdropPath,
     required this.overview,
@@ -23,6 +25,7 @@ class Movie {
     return Movie(
       id: json['id'].toString(),
       title: json['title'] ?? 'Título Desconocido',
+      name: json['name'] ?? 'Título Desconocido',
       posterPath: json['poster_path'] ?? '',
       backdropPath: json['backdrop_path'],
       overview: json['overview'] ?? 'Sin descripción.',

@@ -37,16 +37,22 @@ class _MainScreenState extends State<MainScreen> {
             showDialog(
               context: context,
               builder: (_) => AlertDialog(
+                shadowColor: Color(0xFFD43162),
+                backgroundColor: Colors.grey[800],
                 title: Text('Resultados para "$query"'),
+                titleTextStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color: Colors.white,
+                    ),
                 content: SizedBox(
                   width: double.maxFinite,
                   height: 300,
                   child: results.isEmpty
                       ? const Text('No se encontraron resultados.')
-                      : ListView.builder(
+                      : ListView.separated(
                           itemCount: results.length,
                           itemBuilder: (_, i) => ListTile(
                             title: Text(results[i].title),
+                            textColor: Colors.white,
                             onTap: () {
                               Navigator.of(context).pop(); // Cierra el diálogo
                               Navigator.of(context).push(
@@ -55,13 +61,15 @@ class _MainScreenState extends State<MainScreen> {
                                 ),
                               );
                             },
-                          ),
+                            hoverColor: const Color(0xFFD43162),
+                          ), separatorBuilder: (BuildContext context, int index) => const Divider(color: Colors.grey)
                         ),
                 ),
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.of(context).pop(),
                     child: const Text('Cerrar'),
+                    style: TextButton.styleFrom(foregroundColor: Colors.red),
                   )
                 ],
               ),
