@@ -37,6 +37,10 @@ class DetailScreen extends StatelessWidget {
                       : ListView.separated(
                           itemCount: results.length,
                           itemBuilder: (_, i) => ListTile(
+                            leading: Image.network(
+                              'https://image.tmdb.org/t/p/w500${results[i].posterPath}',
+                              fit: BoxFit.cover,
+                            ),
                             title: Text(results[i].title),
                             textColor: Colors.white,
                             onTap: () {

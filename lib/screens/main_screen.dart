@@ -52,6 +52,10 @@ class _MainScreenState extends State<MainScreen> {
                           itemCount: results.length,
                           itemBuilder: (_, i) => ListTile(
                             title: Text(results[i].title),
+                            leading: Image.network(
+                              'https://image.tmdb.org/t/p/w500${results[i].posterPath}',
+                              fit: BoxFit.cover,
+                            ),
                             textColor: Colors.white,
                             onTap: () {
                               Navigator.of(context).pop(); // Cierra el diálogo
