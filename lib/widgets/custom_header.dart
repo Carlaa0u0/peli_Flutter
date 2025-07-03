@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pelicula_1/screens/main_screen.dart';
 
 class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
   final ValueChanged<String> onSearch;
@@ -41,12 +42,30 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  IconButton(
+                    icon: Image.asset(
+                      'assets/image/logoNegro.png',
+                      height: logoSize,
+                      width: logoSize,
+                      fit: BoxFit.contain,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const MainScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                  
+                  /*
                   Image.asset(
                     'assets/image/logoNegro.png',
                     height: logoSize,
                     width: logoSize,
                     fit: BoxFit.contain,
-                  ),
+                  ), */
                   SizedBox(height: spacing),
                   ConstrainedBox(
                     constraints: BoxConstraints(maxWidth: searchMaxWidth),
@@ -62,14 +81,21 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // Contenedor fijo para el logo (fijo para evitar que crezca y afecte el buscador)
-                  SizedBox(
-                    width: logoSize,
-                    height: logoSize,
-                    child: Image.asset(
+                  IconButton(
+                    icon: Image.asset(
                       'assets/image/logoNegro.png',
+                      height: logoSize,
+                      width: logoSize,
                       fit: BoxFit.contain,
                     ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const MainScreen(),
+                        ),
+                      );
+                    },
                   ),
 
                   SizedBox(width: spacing),
